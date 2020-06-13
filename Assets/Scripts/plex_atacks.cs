@@ -102,7 +102,7 @@ public class plex_atacks : MonoBehaviour {
                 break;
             case ATTACK.SHITBOMB:
                 laserBeamAnimator.enabled = false;
-                GetComponent<ShittingBomber>().active = true;
+                GetComponent<RocketLauncher>().Launch();
                 break;
         }
 
