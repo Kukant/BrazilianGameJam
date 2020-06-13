@@ -20,14 +20,14 @@ public class plex_movement : MonoBehaviour {
     
     public float GetRotation(Direction d) {
         switch (d) {
-            case Direction.UP: return .40f;
-            case Direction.UP_L: return .55f;
-            case Direction.LEFT: return .75f;
-            case Direction.DOWN_L: return .55f;
-            case Direction.DOWN: return .40f;
-            case Direction.DOWN_R: return .20f;
+            case Direction.UP: return .30f;
+            case Direction.UP_L: return .45f;
+            case Direction.LEFT: return .65f;
+            case Direction.DOWN_L: return .45f;
+            case Direction.DOWN: return .30f;
+            case Direction.DOWN_R: return .15f;
             case Direction.RIGHT: return -.20f;
-            case Direction.UP_R: return .20f;
+            case Direction.UP_R: return .15f;
         }
         return 0f;
     }

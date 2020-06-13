@@ -4,6 +4,7 @@ using UnityEngine.XR;
 
 public class plex_atacks : MonoBehaviour {
     public ATTACK ActiveAttack = ATTACK.MEELE;
+    public bool attacking = false;
     private int keyShifted = 0; // Just so that ctrl changing is more user-friendly
     
     public float MeeleRadius = 25f;
@@ -50,6 +51,7 @@ public class plex_atacks : MonoBehaviour {
         
         meeleCollider.enabled = false;
         laserCollider.enabled = false;
+        attacking = false;
 
         handleAttackSelection();
         handleAttackUsage();
@@ -72,6 +74,8 @@ public class plex_atacks : MonoBehaviour {
                 }
                 break;
         }
+
+        attacking = meeleCollider.enabled || laserCollider.enabled;
     }
 
     private void handleAttackUsage() {
