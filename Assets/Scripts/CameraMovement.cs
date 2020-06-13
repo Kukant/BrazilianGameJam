@@ -6,9 +6,8 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour {
     
     private Transform playerTransform;        //Public variable to store a reference to the player game object
-    private float maxRadius = 5f;
     public float goldSpeed = 0.1f;
-    private float speed = 0.1f;
+    public float speed = 0.1f;
     private Camera thisCamera;
     private float cameraWidth;
 
@@ -23,7 +22,7 @@ public class CameraMovement : MonoBehaviour {
     void FixedUpdate () {
         // right quarter
         if (playerTransform.position.x > transform.position.x + cameraWidth/3
-            && speed < 1.7f * goldSpeed) {
+            && speed < 20f * goldSpeed) {
             speed += 0.01f; 
         // left quarter
         } else if (playerTransform.position.x < transform.position.x - cameraWidth/4 &&

@@ -90,7 +90,7 @@ class SlowBackground {
     private float lastCameraPos;
     private int spriteCount;
     public SlowBackground(Sprite backgroundSprite, float slowdown, float cameraPos, float smaller) {
-        this.lastCameraPos = cameraPos;
+        lastCameraPos = cameraPos;
         backgrounds = new List<GameObject>();
         spriteWidth = 0f;
         spriteCount = 3;
@@ -99,7 +99,6 @@ class SlowBackground {
             var sr = go.AddComponent<SpriteRenderer>();
             sr.sortingLayerName = "Background";
             sr.sprite = backgroundSprite;
-            go.transform.localScale = new Vector3(smaller, smaller, 1);
             
             spriteWidth = go.GetComponent<Renderer>().bounds.size.x;
             var oldPos = go.transform.position;

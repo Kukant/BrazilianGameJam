@@ -28,6 +28,7 @@ public class plex_atacks : MonoBehaviour {
         MEELE,
         GUN,
         LASER,
+        SHITBOMB
     }
 
     // Start is called before the first frame update
@@ -73,6 +74,9 @@ public class plex_atacks : MonoBehaviour {
                     laserCollider.enabled = true;
                 }
                 break;
+            case ATTACK.SHITBOMB:
+                GetComponent<ShittingBomber>().active = true;
+                break;
         }
 
         attacking = meeleCollider.enabled || laserCollider.enabled;
@@ -109,6 +113,8 @@ public class plex_atacks : MonoBehaviour {
             ActiveAttack = ATTACK.GUN;
         } else if (Input.GetKey(KeyCode.Alpha3)) {
             ActiveAttack = ATTACK.LASER;
+        } else if (Input.GetKey(KeyCode.Alpha4)) {
+            ActiveAttack = ATTACK.SHITBOMB;
         } else if (Input.GetKey(KeyCode.LeftControl) && keyShifted == 0) {
             ActiveAttack = (ATTACK)(((int)ActiveAttack + 1) % 3);
             keyShifted = 10;
