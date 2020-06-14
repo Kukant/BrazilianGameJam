@@ -16,22 +16,29 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die() {
         if (explosion != null) {
-            // todo
+            Instantiate(explosion, transform.position, transform.rotation);
         }
         
         Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        handleCollision(other);
+        if (LayerMask.LayerToName(other.gameObject.layer) == "guns") {
+            Debug.Log("melee hit");
+        }
+        handleCollision(other.gameObject);
     }
     
-    private void OnCollisionStay2D(Collision2D other) {
-        handleCollision(other);
+    private void OnTriggerStay2D(Collider2D other) {
+        if (LayerMask.LayerToName(other.gameObject.layer) == "guns") {
+            Debug.Log("laser hit");
+        }
+        handleCollision(other.gameObject);
+        
     }
 
-    void handleCollision(Collision2D other) {
-        if (LayerMask.LayerToName(other.gameObject.layer) == "guns") {
+    void handleCollision(GameObject other) {
+        if (LayerMask.LayerToName(other.layer) == "guns") {
             var pre = health;
             health -= other.gameObject.GetComponent<Damage>().damage;
             if (health < 0) {
