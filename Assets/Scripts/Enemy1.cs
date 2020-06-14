@@ -19,15 +19,26 @@ public class Enemy1 : MonoBehaviour
     public int CurrentNumberOfSpawnees = 0;
     public int Delay = 15;
     private int delay = 0;
-    public bool inside;
+    public bool inside, right;
     private int iter = 0;
-   
+    private readonly System.Random random = new System.Random();
+
     // Start is called before the first frame update
     void Start()
     {
+        int rand = RandomNumber(1, 3);
+        Debug.Log(rand);
+        if (rand == 1)
+        {
+            right = true;
+        }
+
         centre = transform.position;
     }
-
+    public int RandomNumber(int min, int max)
+    {
+        return random.Next(min, max);
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -35,7 +46,14 @@ public class Enemy1 : MonoBehaviour
         if (IsActive)
         {
             // circle motion
-            transform.position = centre + CircleOffset(Time.deltaTime, Radius);
+            if (right)
+            {
+                transform.position = centre + CircleOffset(Time.deltaTime, Radius);
+            }
+            else
+            {
+                transform.position = centre - CircleOffset(Time.deltaTime, Radius);
+            }
 
             // fire objects
             if (CurrentNumberOfSpawnees <= MaxNumberOfSpawnees)
