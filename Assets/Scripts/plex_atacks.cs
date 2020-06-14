@@ -77,7 +77,6 @@ public class plex_atacks : MonoBehaviour {
     }
 
     private void attack(float dx, float dy, float angleZ) {
-        transform.rotation = Quaternion.Euler(0, 0, angleZ);
         //transform.position = positionAttacking();
         switch (ActiveAttack) {
             case ATTACK.MEELE:
@@ -103,8 +102,12 @@ public class plex_atacks : MonoBehaviour {
             case ATTACK.SHITBOMB:
                 laserBeamAnimator.enabled = false;
                 GetComponentInChildren<RocketLauncher>().Launch();
+                
+                angleZ = 0;
                 break;
         }
+        
+        transform.rotation = Quaternion.Euler(0, 0, angleZ);
 
         attacking = meeleCollider.enabled || laserCollider.enabled;
     }
@@ -138,14 +141,19 @@ public class plex_atacks : MonoBehaviour {
     private void handleAttackSelection() {
         if (Input.GetKey(KeyCode.Alpha1)) {
             ActiveAttack = ATTACK.MEELE;
+            GetComponentInChildren<RocketLauncher>().Activate(false);
         } else if (Input.GetKey(KeyCode.Alpha2)) {
             ActiveAttack = ATTACK.GUN;
+            GetComponentInChildren<RocketLauncher>().Activate(false);
         } else if (Input.GetKey(KeyCode.Alpha3)) {
             ActiveAttack = ATTACK.LASER;
+            GetComponentInChildren<RocketLauncher>().Activate(false);
         } else if (Input.GetKey(KeyCode.Alpha4)) {
             ActiveAttack = ATTACK.SHITBOMB;
+            GetComponentInChildren<RocketLauncher>().Activate(true);
         } else if (Input.GetKey(KeyCode.LeftControl) && keyShifted == 0) {
             ActiveAttack = (ATTACK)(((int)ActiveAttack + 1) % 3);
+            GetComponentInChildren<RocketLauncher>().Activate(false);
             keyShifted = 10;
         }
     }

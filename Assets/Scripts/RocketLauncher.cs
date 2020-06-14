@@ -9,10 +9,26 @@ public class RocketLauncher : MonoBehaviour {
     public GameObject rocketPrefab;
     public int cooldownMills = 1000;
     private Rigidbody2D playerRB;
+
+    private Quaternion currentRotation;
+    private bool shooting = false;
+    
     public void Start() {
         lastLaunch = DateTime.Now;
         playerRB = GameObject.Find("Player").GetComponent<Rigidbody2D>();
     }
+
+    public void Activate(bool on) {
+        GetComponent<SpriteRenderer>().enabled = on;
+        transform.localRotation = Quaternion.Euler(0, 0, -90);
+    }
+
+    private void LateUpdate() {
+        if (shooting) {
+            transform.rotation = currentRotation;
+        }
+    }
+
 
     public void Launch() {
         TimeSpan fromLastLaunch = DateTime.Now - lastLaunch;
@@ -34,7 +50,44 @@ public class RocketLauncher : MonoBehaviour {
     }
 
     private void _launch(int angle) {
-        var r = Instantiate(rocketPrefab, transform.position, Quaternion.Euler(0, 0, angle));
+        StartCoroutine(_launchProcedure(angle));
+    }
+    
+    IEnumerator _launchProcedure(int angle) {
+        shooting = true;
+        
+        if (angle == 90) {
+            currentRotation = Quaternion.Euler(0, 180, 270);
+        } else {
+            currentRotation = Quaternion.Euler(0, 0, angle);
+        }
+        
+        yield return new WaitForSeconds(0.2f);
+        
+        
+        var newpos = transform.position;
+        var diff = 2f;
+        if (angle == 0) {
+            newpos.y += diff;
+        } else if (angle == 180) {
+            newpos.y -= diff;
+        } else if (angle == 90) {
+            newpos.x -= diff;
+        } else if (angle == 270) {
+            newpos.x += diff;
+        }
+        
+        
+
+        var r = Instantiate(rocketPrefab, newpos, Quaternion.Euler(0, 0, angle));
+        
         r.GetComponent<Rigidbody2D>().velocity = playerRB.velocity;
+        
+        
+        yield return new WaitForSeconds(0.4f);
+        
+        
+        shooting = false;
+        transform.localRotation = Quaternion.Euler(0, 0, -90);
     }
 }

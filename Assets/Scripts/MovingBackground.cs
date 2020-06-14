@@ -28,7 +28,7 @@ public class MovingBackground : MonoBehaviour {
         float smaller = 2;
         for (var i = 0; i < backgrounds.Count; i++) {
             slowBackgrounds.Add(
-                new SlowBackground(backgrounds[i], relativeSlowdowns[i], mainCamera.transform.position.x, smaller)
+                new SlowBackground(backgrounds[i], relativeSlowdowns[i], mainCamera.transform.position.x, smaller, i)
             );
             smaller = smaller - 0.5f;
         }
@@ -89,7 +89,7 @@ class SlowBackground {
     private float spriteWidth;
     private float lastCameraPos;
     private int spriteCount;
-    public SlowBackground(Sprite backgroundSprite, float slowdown, float cameraPos, float smaller) {
+    public SlowBackground(Sprite backgroundSprite, float slowdown, float cameraPos, float smaller, int layerIdx) {
         lastCameraPos = cameraPos;
         backgrounds = new List<GameObject>();
         spriteWidth = 0f;
@@ -98,9 +98,10 @@ class SlowBackground {
             var go = new GameObject();
             var sr = go.AddComponent<SpriteRenderer>();
             sr.sortingLayerName = "Background";
+            sr.sortingOrder = layerIdx;
             sr.sprite = backgroundSprite;
             
-            spriteWidth = go.GetComponent<Renderer>().bounds.size.x;
+            spriteWidth = go.GetComponent<Renderer>().bounds.size.x * .99f;
             var oldPos = go.transform.position;
             go.transform.position = new Vector3(oldPos.x + i * spriteWidth, oldPos.y);
             
