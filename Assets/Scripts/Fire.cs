@@ -9,7 +9,7 @@ public class Fire : MonoBehaviour
 
     void Start()
     {
-        transform.GetComponent<Animator>().enabled = false;    
+        transform.GetComponent<Animator>().enabled = false;  
     }
     // Update is called once per frame
     void Update()

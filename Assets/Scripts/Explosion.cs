@@ -11,6 +11,7 @@ public class Explosion : MonoBehaviour
     void Start() {
         animator = GetComponent<Animator>();
         animator.Play(0);
+        MusicController.SoundController(MusicController.SOUNDS.EXPLOSION, true);
         StartCoroutine(WaitForAnim());
         StartCoroutine(TurnOffCollider());
     }

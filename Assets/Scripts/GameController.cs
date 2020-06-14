@@ -19,12 +19,15 @@ public class GameController : MonoBehaviour {
         level1 = Instantiate(Level1Prefab, Vector3.zero, Quaternion.identity).GetComponent<LevelScript>();
         level1.Load();
         scoreText = Score.GetComponentInChildren<Text>();
+        MusicController.SoundController(MusicController.SOUNDS.MENU, true);
     }
 
     public void RunLevel1() {
         level1.Run();
         MainMenu.SetActive(false);
         Score.SetActive(true);
+        MusicController.SoundController(MusicController.SOUNDS.MENU, false);
+        MusicController.SoundController(MusicController.SOUNDS.GAME_INTRO, true);
     }
 
     public void RestartLevel1() {

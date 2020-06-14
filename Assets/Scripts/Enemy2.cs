@@ -52,6 +52,7 @@ public class Enemy2 : MonoBehaviour
     private void FireLaser()
     {
         GameObject laser;
+        MusicController.SoundController(MusicController.SOUNDS.SNAKE_LASER, true);
         if (transform.rotation.eulerAngles.z >= 170)
         {
             laser = Instantiate(Spawnee, transform.position, Quaternion.Euler(0, 0, 180));

@@ -18,7 +18,7 @@ public class EnemyHealth : MonoBehaviour
         if (explosion != null) {
             Instantiate(explosion, transform.position, transform.rotation);
         }
-        
+        MusicController.SoundController(MusicController.SOUNDS.ENEMY_DEATH, true);
         Destroy(gameObject);
     }
     

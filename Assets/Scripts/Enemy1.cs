@@ -57,6 +57,7 @@ public class Enemy1 : MonoBehaviour
                 if (delay == Delay)
                 {
                     GameObject fire = Instantiate(Spawnee);
+                    MusicController.SoundController(MusicController.SOUNDS.FIREBALL_SPAWN, true);
                     fire.name = string.Format("fire {0}", CurrentNumberOfSpawnees + 1);
                     fire.transform.SetParent(transform);
                     
@@ -75,6 +76,7 @@ public class Enemy1 : MonoBehaviour
                     child.position = Vector2.MoveTowards(child.position, transform.position, -1 * 15 * Time.deltaTime);
                     if (transform.childCount > iter)
                     {
+                        MusicController.SoundController(MusicController.SOUNDS.FIREBALL_SHOT, true);
                         float angle = Vector3.Angle(Vector3.right, child.position - transform.position);
                         if (transform.position.y - child.position.y > 0)
                         {

@@ -153,6 +153,7 @@ public class hands_movement : MonoBehaviour {
                         backHandAttackAnimator.enabled = true;
                         frontHandAttackAnimator.Rebind();
                         backHandAttackAnimator.Rebind();
+                        MusicController.SoundController(MusicController.SOUNDS.MEELE_SLASH, true);
                     }
                     break;
                 case plex_atacks.ATTACK.GUN:

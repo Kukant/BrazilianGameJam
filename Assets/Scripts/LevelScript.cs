@@ -62,6 +62,12 @@ public class LevelScript : MonoBehaviour {
                 cameraPosX + generationOffest + enemiesGenerationLength);
             lastCameraPos = cameraPosX;
         }
+        
+        if (!MusicController.soundCollection[MusicController.SOUNDS.MENU].isPlaying
+            && !MusicController.soundCollection[MusicController.SOUNDS.GAME_INTRO].isPlaying
+            && !MusicController.soundCollection[MusicController.SOUNDS.GAME_LOOP].isPlaying) {
+            MusicController.SoundController(MusicController.SOUNDS.GAME_LOOP, true);
+        }
     }
 
     private void generateEnemies(float fromX, float toX) {

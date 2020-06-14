@@ -79,7 +79,7 @@ public class RocketLauncher : MonoBehaviour {
         
 
         var r = Instantiate(rocketPrefab, newpos, Quaternion.Euler(0, 0, angle));
-        
+        MusicController.SoundController(MusicController.SOUNDS.ROCKET_LAUNCH, true);
         r.GetComponent<Rigidbody2D>().velocity = playerRB.velocity;
         
         
