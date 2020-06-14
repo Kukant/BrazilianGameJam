@@ -144,6 +144,7 @@ public class plex_atacks : MonoBehaviour {
             GetComponentInChildren<RocketLauncher>().Activate(false);
         } else if (Input.GetKey(KeyCode.Alpha2)) {
             ActiveAttack = ATTACK.GUN;
+            GetComponentInChildren<RocketLauncher>().Activate(true);
         } else if (Input.GetKey(KeyCode.Alpha3)) {
             ActiveAttack = ATTACK.LASER;
             GetComponentInChildren<RocketLauncher>().Activate(false);

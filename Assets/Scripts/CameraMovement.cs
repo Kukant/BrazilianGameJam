@@ -13,7 +13,7 @@ public class CameraMovement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        playerTransform = GameObject.Find("Player").transform;
+        playerTransform = GameObject.Find("Player(Clone)").transform;
         thisCamera = GetComponent<Camera>();
         cameraWidth = thisCamera.aspect * thisCamera.orthographicSize * 2;
     }

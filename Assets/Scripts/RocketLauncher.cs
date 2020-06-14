@@ -15,7 +15,7 @@ public class RocketLauncher : MonoBehaviour {
     
     public void Start() {
         lastLaunch = DateTime.Now;
-        playerRB = GameObject.Find("Player").GetComponent<Rigidbody2D>();
+        playerRB = GameObject.Find("Player(Clone)").GetComponent<Rigidbody2D>();
     }
 
     public void Activate(bool on) {
@@ -32,7 +32,6 @@ public class RocketLauncher : MonoBehaviour {
 
     public void Launch() {
         TimeSpan fromLastLaunch = DateTime.Now - lastLaunch;
-        print(fromLastLaunch.Milliseconds);
         if (fromLastLaunch.TotalMilliseconds < cooldownMills) {
             return;
         }

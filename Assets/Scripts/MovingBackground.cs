@@ -60,7 +60,6 @@ class PhysicalBackground {
         spriteCount = 3;
         for (var i = 0; i < spriteCount; i++) {
             var instance = Object.Instantiate(prefab, new Vector3(i * physicalWidth, 0, 0), Quaternion.identity);
-            Debug.Log(instance);
             instances.Enqueue(instance);
         }
     }
