@@ -33,16 +33,13 @@ public class LevelScript : MonoBehaviour {
         generateEnemies(generationOffest, enemiesGenerationLength + generationOffest);
         
         mainCamera = GameObject.Find("Main Camera");
-        Debug.Log(mainCamera);
         mcMovement = mainCamera.GetComponent<CameraMovement>();
-        mcMovement.speed = 0;
-        mcMovement.goldSpeed = 0f;
-
+        mcMovement.Stop();
         lastCameraPos = 0f;
     }
 
     public void Run() {
-        mcMovement.goldSpeed = 0.1f;
+        mcMovement.Run();
     }
     
     public void Restart() {

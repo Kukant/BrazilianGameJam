@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 3162129364708828749}
   - component: {fileID: 3162129364708828746}
   - component: {fileID: 3162129364708828747}
-  m_Layer: 0
+  - component: {fileID: 903992235062996568}
+  m_Layer: 10
   m_Name: RocketExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,3 +132,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.7959866
+--- !u!114 &903992235062996568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3162129364708828750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0788bcbd81c104dffbf02e6835ae5703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 200

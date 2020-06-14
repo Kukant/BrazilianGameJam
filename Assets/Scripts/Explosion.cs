@@ -12,10 +12,16 @@ public class Explosion : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.Play(0);
         StartCoroutine(WaitForAnim());
+        StartCoroutine(TurnOffCollider());
     }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        // todo remove some health
+    
+    
+    IEnumerator TurnOffCollider()
+    {
+        yield return new WaitForSeconds(0.5f);
+        var col = transform.GetComponent<CircleCollider2D>();
+        if (col)
+            col.enabled = false;
     }
 
     IEnumerator WaitForAnim()

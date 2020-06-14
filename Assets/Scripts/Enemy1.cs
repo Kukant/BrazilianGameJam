@@ -28,7 +28,6 @@ public class Enemy1 : MonoBehaviour
     void Start()
     {
         float rand = UnityEngine.Random.value;
-        Debug.Log(rand);
         if (rand > 0.5)
         {
             right = true;

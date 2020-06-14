@@ -21,20 +21,15 @@ public class EnemyHealth : MonoBehaviour
         
         Destroy(gameObject);
     }
-
-    private void OnCollisionEnter2D(Collision2D other) {
-        if (LayerMask.LayerToName(other.gameObject.layer) == "guns") {
-            Debug.Log("melee hit");
-        }
-        handleCollision(other.gameObject);
-    }
+    
     
     private void OnTriggerStay2D(Collider2D other) {
-        if (LayerMask.LayerToName(other.gameObject.layer) == "guns") {
-            Debug.Log("laser hit");
-        }
         handleCollision(other.gameObject);
         
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other) {
+        handleCollision(other.gameObject);
     }
 
     void handleCollision(GameObject other) {
