@@ -1,23 +1,19 @@
 using System;
-using System.Numerics;
 using UnityEngine;
-using UnityEngine.XR;
 using Quaternion = UnityEngine.Quaternion;
-using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 public class plex_atacks : MonoBehaviour {
     public ATTACK ActiveAttack = ATTACK.MEELE;
     public bool attacking = false;
     private int keyShifted = 0; // Just so that ctrl changing is more user-friendly
-    private Vector3 baseTransform;
-    private Transform plexTransform;
-    
+
     public float MeeleRadius = 25f;
     public float MeelePower = 10f;
     public int MeeleCooldown = 50;
     public int MeeleCooling = 0;
     private CircleCollider2D meeleCollider;
+    private Animator[] meeleSlashAnimators;
     
     public float GunRadius = 10f;
     public float GunPower = 10f;
@@ -41,16 +37,16 @@ public class plex_atacks : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        baseTransform = transform.position;
-        plexTransform = transform.parent.GetChild(1).GetComponent<Transform>();
-            
+        meeleSlashAnimators = transform.GetChild(1).GetComponentsInChildren<Animator>();
         meeleCollider = transform.GetChild(1).GetComponents<CircleCollider2D>()[0];
+        foreach (Animator animator in meeleSlashAnimators) {
+            animator.enabled = false;
+        }
         meeleCollider.radius = MeeleRadius;
-        meeleCollider.offset = new Vector2(MeeleRadius, 0);
         meeleCollider.enabled = false;
 
-        laserBeamSprite = transform.GetChild(0).GetComponentsInChildren<SpriteRenderer>()[0];
-        laserBeamAnimator = transform.GetChild(0).GetComponentsInChildren<Animator>()[0];
+        laserBeamSprite = transform.GetChild(0).GetComponentInChildren<SpriteRenderer>();
+        laserBeamAnimator = transform.GetChild(0).GetComponentInChildren<Animator>();
         laserCollider = transform.GetChild(0).GetComponents<PolygonCollider2D>()[0];
         laserBeamSprite.enabled = false;
         laserBeamAnimator.enabled = false;
@@ -58,7 +54,7 @@ public class plex_atacks : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void LateUpdate() {
+    void FixedUpdate() {
         MeeleCooling = Math.Max(0, MeeleCooling - 1);
         GunCooling = Math.Max(0, GunCooling - 1);
         LaserCooling = Math.Max(0, LaserCooling - 1);
@@ -66,7 +62,7 @@ public class plex_atacks : MonoBehaviour {
         keyShifted = Math.Max(0, keyShifted - 1);
         
         meeleCollider.enabled = false;
-        
+
         laserCollider.enabled = false;
         laserBeamSprite.enabled = false;
         attacking = false;
@@ -75,7 +71,7 @@ public class plex_atacks : MonoBehaviour {
         handleAttackUsage();
     }
 
-    private void attack(float dx, float dy, float angleZ) {
+    private void attack(float angleZ) {
         switch (ActiveAttack) {
             case ATTACK.MEELE:
                 laserBeamAnimator.enabled = false;
@@ -83,7 +79,14 @@ public class plex_atacks : MonoBehaviour {
                 if (MeeleCooling == 0) {
                     MeeleCooling = MeeleCooldown;
                     meeleCollider.enabled = true;
+                    foreach (Animator animator in meeleSlashAnimators) {
+                        animator.Rebind();
+                        if (!animator.enabled) {
+                            animator.enabled = true;
+                        }
+                    }
                 }
+                angleZ = 0;
                 break;
             case ATTACK.GUN:
                 laserBeamAnimator.enabled = false;
@@ -105,31 +108,31 @@ public class plex_atacks : MonoBehaviour {
         }
         
         transform.rotation = Quaternion.Euler(0, 0, angleZ);
-
+        
         attacking = meeleCollider.enabled || laserCollider.enabled;
     }
 
     private void handleAttackUsage() {
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Keypad8)) {
             if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.Keypad6)) {
-                attack(1, -1, 45);
+                attack(45);
             } else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.Keypad4)) {
-                attack(-1, -1, 135);
+                attack(135);
             } else {
-                attack(0, -1 , 90);
+                attack(90);
             }
         } else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.Keypad5)) {
             if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.Keypad6)) {
-                attack(1, 1, -45);
+                attack(-45);
             } else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.Keypad4)) {
-                attack(-1, 1, -135);
+                attack(-135);
             } else {
-                attack(0, 1, -90);
+                attack(-90);
             }
         } else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.Keypad4)) {
-            attack(-1, 0, 180);
+            attack(180);
         } else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.Keypad6)) {
-            attack(1, 0, 0);
+            attack(0);
         } else {
             laserBeamAnimator.enabled = false;
         }
