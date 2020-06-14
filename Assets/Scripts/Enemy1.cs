@@ -26,18 +26,13 @@ public class Enemy1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int rand = RandomNumber(1, 100);
+        float rand = UnityEngine.Random.value;
         Debug.Log(rand);
-        if (rand > 50)
+        if (rand > 0.5)
         {
             right = true;
         }
         centre = transform.position;
-    }
-    public int RandomNumber(int min, int max)
-    {
-        System.Random random = new System.Random();
-        return random.Next(min, max);
     }
     // Update is called once per frame
     void FixedUpdate()
