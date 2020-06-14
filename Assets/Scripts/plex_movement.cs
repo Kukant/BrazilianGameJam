@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class plex_movement : MonoBehaviour {
     public Direction PlexDirection = Direction.NONE;
-    public float RotationState = 0f;
     public float RotationSpeed = .05f;
     
     public enum Direction {
@@ -18,7 +17,7 @@ public class plex_movement : MonoBehaviour {
         NONE,
     };
     
-    public float GetRotation(Direction d) {
+    public static float GetRotation(Direction d) {
         switch (d) {
             case Direction.UP: return .30f;
             case Direction.UP_L: return .45f;

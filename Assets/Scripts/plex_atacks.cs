@@ -1,11 +1,17 @@
 ﻿using System;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.XR;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class plex_atacks : MonoBehaviour {
     public ATTACK ActiveAttack = ATTACK.MEELE;
     public bool attacking = false;
     private int keyShifted = 0; // Just so that ctrl changing is more user-friendly
+    private Vector3 baseTransform;
+    private Transform plexTransform;
     
     public float MeeleRadius = 25f;
     public float MeelePower = 10f;
@@ -22,7 +28,10 @@ public class plex_atacks : MonoBehaviour {
     public float LaserPower = 1f;
     public int LaserCooldown = 0;
     public int LaserCooling = 0;
+    
     private PolygonCollider2D laserCollider;
+    private SpriteRenderer laserBeamSprite;
+    private Animator laserBeamAnimator;
     
     public enum ATTACK {
         MEELE,
@@ -33,12 +42,19 @@ public class plex_atacks : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        meeleCollider = transform.GetComponentsInChildren<CircleCollider2D>()[0];
+        baseTransform = transform.position;
+        plexTransform = transform.parent.GetChild(1).GetComponent<Transform>();
+            
+        meeleCollider = transform.GetChild(1).GetComponents<CircleCollider2D>()[0];
         meeleCollider.radius = MeeleRadius;
         meeleCollider.offset = new Vector2(MeeleRadius, 0);
         meeleCollider.enabled = false;
-        
-        laserCollider = transform.GetComponentsInChildren<PolygonCollider2D>()[0];
+
+        laserBeamSprite = transform.GetChild(0).GetComponentsInChildren<SpriteRenderer>()[0];
+        laserBeamAnimator = transform.GetChild(0).GetComponentsInChildren<Animator>()[0];
+        laserCollider = transform.GetChild(0).GetComponents<PolygonCollider2D>()[0];
+        laserBeamSprite.enabled = false;
+        laserBeamAnimator.enabled = false;
         laserCollider.enabled = false;
     }
 
@@ -51,7 +67,9 @@ public class plex_atacks : MonoBehaviour {
         keyShifted = Math.Max(0, keyShifted - 1);
         
         meeleCollider.enabled = false;
+        
         laserCollider.enabled = false;
+        laserBeamSprite.enabled = false;
         attacking = false;
 
         handleAttackSelection();
@@ -60,8 +78,11 @@ public class plex_atacks : MonoBehaviour {
 
     private void attack(float dx, float dy, float angleZ) {
         transform.rotation = Quaternion.Euler(0, 0, angleZ);
+        transform.position = positionAttacking();
         switch (ActiveAttack) {
             case ATTACK.MEELE:
+                laserBeamAnimator.enabled = false;
+                
                 if (MeeleCooling == 0) {
                     MeeleCooling = MeeleCooldown;
                     meeleCollider.enabled = true;
@@ -72,9 +93,15 @@ public class plex_atacks : MonoBehaviour {
                 if (LaserCooling == 0) {
                     LaserCooling = LaserCooldown;
                     laserCollider.enabled = true;
+                    laserBeamSprite.enabled = true;
+                    if (!laserBeamAnimator.enabled) {
+                        laserBeamAnimator.Rebind();
+                        laserBeamAnimator.enabled = true;
+                    }
                 }
                 break;
             case ATTACK.SHITBOMB:
+                laserBeamAnimator.enabled = false;
                 GetComponent<ShittingBomber>().active = true;
                 break;
         }
@@ -103,6 +130,8 @@ public class plex_atacks : MonoBehaviour {
             attack(-1, 0, 180);
         } else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.Keypad6)) {
             attack(1, 0, 0);
+        } else {
+            laserBeamAnimator.enabled = false;
         }
     }
 
@@ -119,5 +148,12 @@ public class plex_atacks : MonoBehaviour {
             ActiveAttack = (ATTACK)(((int)ActiveAttack + 1) % 3);
             keyShifted = 10;
         }
+    }
+
+    private Vector3 positionAttacking() {
+        float plexRotation = plexTransform.rotation.z;
+        float dx = plexRotation / 1.2f;
+        float dy = (Math.Abs(plexRotation - 0.22f) / 1.5f) - .14f;
+        return new Vector3(baseTransform.x + dx, baseTransform.y + dy, baseTransform.z);
     }
 }
