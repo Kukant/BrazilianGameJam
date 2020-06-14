@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.XR;
@@ -59,7 +59,7 @@ public class plex_atacks : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void FixedUpdate() {
+    void LateUpdate() {
         MeeleCooling = Math.Max(0, MeeleCooling - 1);
         GunCooling = Math.Max(0, GunCooling - 1);
         LaserCooling = Math.Max(0, LaserCooling - 1);
