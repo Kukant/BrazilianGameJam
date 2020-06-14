@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
@@ -62,8 +63,7 @@ public class plex_atacks : MonoBehaviour {
         keyShifted = Math.Max(0, keyShifted - 1);
         
         meeleCollider.enabled = false;
-
-        laserCollider.enabled = false;
+        
         laserBeamSprite.enabled = false;
         attacking = false;
 
@@ -74,7 +74,9 @@ public class plex_atacks : MonoBehaviour {
     private void attack(float angleZ) {
         switch (ActiveAttack) {
             case ATTACK.MEELE:
+                MusicController.SoundController(MusicController.SOUNDS.LASER_BEAM, false);
                 laserBeamAnimator.enabled = false;
+                laserCollider.enabled = false;
                 
                 if (MeeleCooling == 0) {
                     MeeleCooling = MeeleCooldown;
@@ -89,7 +91,9 @@ public class plex_atacks : MonoBehaviour {
                 angleZ = 0;
                 break;
             case ATTACK.GUN:
+                MusicController.SoundController(MusicController.SOUNDS.LASER_BEAM, false);
                 laserBeamAnimator.enabled = false;
+                laserCollider.enabled = false;
                 GetComponentInChildren<RocketLauncher>().Launch();
                 
                 angleZ = 0;
@@ -97,11 +101,11 @@ public class plex_atacks : MonoBehaviour {
             case ATTACK.LASER:
                 if (LaserCooling == 0) {
                     LaserCooling = LaserCooldown;
-                    laserCollider.enabled = true;
                     laserBeamSprite.enabled = true;
                     if (!laserBeamAnimator.enabled) {
                         laserBeamAnimator.Rebind();
                         laserBeamAnimator.enabled = true;
+                        StartCoroutine(enableLaserCollider());
                     }
                 }
                 break;
@@ -109,7 +113,15 @@ public class plex_atacks : MonoBehaviour {
         
         transform.rotation = Quaternion.Euler(0, 0, angleZ);
         
-        attacking = meeleCollider.enabled || laserCollider.enabled;
+        attacking = meeleCollider.enabled || laserBeamAnimator.enabled;
+    }
+    
+    private IEnumerator enableLaserCollider() {
+        yield return new WaitForSeconds(0.25f);
+        if (attacking && ActiveAttack == ATTACK.LASER) {
+            laserCollider.enabled = true;
+            MusicController.SoundController(MusicController.SOUNDS.LASER_BEAM, true);
+        }
     }
 
     private void handleAttackUsage() {
@@ -135,6 +147,8 @@ public class plex_atacks : MonoBehaviour {
             attack(0);
         } else {
             laserBeamAnimator.enabled = false;
+            laserCollider.enabled = false;
+            MusicController.SoundController(MusicController.SOUNDS.LASER_BEAM, false);
         }
     }
 
