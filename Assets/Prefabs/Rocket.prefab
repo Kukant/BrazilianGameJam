@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2729814943932280007}
   - component: {fileID: 2729814943932280006}
   - component: {fileID: 1742402508}
+  - component: {fileID: -2535244030825681304}
   m_Layer: 10
   m_Name: Rocket
   m_TagString: Untagged
@@ -4903,3 +4904,16 @@ PolygonCollider2D:
       - {x: 0.07, y: -1.17}
       - {x: 0.08, y: -1.1}
       - {x: 0.089999996, y: -0.85999995}
+--- !u!114 &-2535244030825681304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729814943932280001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0788bcbd81c104dffbf02e6835ae5703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1000

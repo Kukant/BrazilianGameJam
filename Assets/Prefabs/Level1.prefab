@@ -50,4 +50,6 @@ MonoBehaviour:
   EnemiesPrefabs:
   - {fileID: 1724138759361223420, guid: f971b2b23e1cbab43a5eb0dd181774d4, type: 3}
   - {fileID: 585320266950643926, guid: f5b407cc6347f83468daba3bc937ba9e, type: 3}
+  - {fileID: 8994650225390577374, guid: d5dc32086f4c6ff47b1bf92f3de36c64, type: 3}
+  - {fileID: 2714429069809459330, guid: 58e7b5187110b1a44b2d22ab6da65be4, type: 3}
   enemiesPerIntervalBase: 4

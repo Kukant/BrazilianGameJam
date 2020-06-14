@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using System.Threading;
+using Random = System.Random;
 
 public class Enemy1 : MonoBehaviour
 {

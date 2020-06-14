@@ -10,5 +10,10 @@ public class EnemyTrigger : MonoBehaviour
         if (bla != null) {
             bla.IsActive = true;
         }
+
+        var bla2 = other.GetComponent<Enemy2>();
+        if (bla2 != null) {
+            bla2.Activate();
+        }
     }
 }

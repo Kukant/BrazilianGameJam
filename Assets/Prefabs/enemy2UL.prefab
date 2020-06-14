@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3766613884169704504}
   - component: {fileID: 6654702164277943790}
   - component: {fileID: 5429848193460433885}
+  - component: {fileID: 3929491645875176148}
   m_Layer: 13
   m_Name: enemy2UL
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8994650225390577374}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.274, y: 0.064, z: -1.2667116}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -266,3 +267,16 @@ PolygonCollider2D:
       - {x: 0.89854366, y: -3.3084788}
       - {x: 1.1285437, y: -3.2784789}
       - {x: 1.2385436, y: -3.238479}
+--- !u!114 &3929491645875176148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8994650225390577374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d2725fa921c41d4982ad6d7cb708a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100

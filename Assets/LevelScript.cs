@@ -25,12 +25,10 @@ public class LevelScript : MonoBehaviour {
     
     public void Start() {
         initialPos = transform.position;
-        Load();
-        Run();
     }
     
     public void Load() {
-        player = Instantiate(PlayerPrefab, transform.position, Quaternion.identity);
+        player = Instantiate(PlayerPrefab, transform.position, PlayerPrefab.transform.rotation);
         movingBackground = Instantiate(MovingBackgroundPrefab, transform.position, Quaternion.identity);
         generateEnemies(generationOffest, enemiesGenerationLength + generationOffest);
         
@@ -70,7 +68,6 @@ public class LevelScript : MonoBehaviour {
     }
 
     private void generateEnemies(float fromX, float toX) {
-        Debug.Log($"{fromX} -> {toX}");
         float enemiesToGenerate = Convert.ToInt32(Random.value * enemiesPerIntervalBase) + generations;
         generations++;
 
@@ -78,7 +75,11 @@ public class LevelScript : MonoBehaviour {
             float x = Random.value * (toX - fromX) + fromX;
             float y = generationRangeY * Random.value * (Random.value > 0.5 ? 1 : -1);
             int enemIdx = Convert.ToInt32( Math.Floor(EnemiesPrefabs.Count * Random.value));
-            Instantiate(EnemiesPrefabs[enemIdx], new Vector2(x, y), Quaternion.identity);
+            if (EnemiesPrefabs[enemIdx].name.Contains("2")) {
+                y = 0;
+            }
+
+            Instantiate(EnemiesPrefabs[enemIdx], new Vector2(x, y), EnemiesPrefabs[enemIdx].transform.rotation);
         }
     }
 }
