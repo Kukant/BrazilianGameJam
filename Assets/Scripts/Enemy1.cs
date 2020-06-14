@@ -21,22 +21,22 @@ public class Enemy1 : MonoBehaviour
     private int delay = 0;
     public bool inside, right;
     private int iter = 0;
-    private readonly System.Random random = new System.Random();
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        int rand = RandomNumber(1, 3);
+        int rand = RandomNumber(1, 100);
         Debug.Log(rand);
-        if (rand == 1)
+        if (rand > 50)
         {
             right = true;
         }
-
         centre = transform.position;
     }
     public int RandomNumber(int min, int max)
     {
+        System.Random random = new System.Random();
         return random.Next(min, max);
     }
     // Update is called once per frame
@@ -52,7 +52,7 @@ public class Enemy1 : MonoBehaviour
             }
             else
             {
-                transform.position = centre - CircleOffset(Time.deltaTime, Radius);
+                transform.position =  centre + CircleOffset2(Time.deltaTime, Radius);
             }
 
             // fire objects
@@ -108,6 +108,11 @@ public class Enemy1 : MonoBehaviour
     {
         angle += speed * delta;
         return new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * radius;
+    }
+    private Vector2 CircleOffset2(float delta, float radius)
+    {
+        angle += speed * delta;
+        return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle) ) * radius;
     }
 
 

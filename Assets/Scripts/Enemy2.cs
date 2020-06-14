@@ -5,32 +5,48 @@ public class Enemy2 : MonoBehaviour
     public float Speed = 2.5f;
     public GameObject Spawnee;
     public bool NextFire = true;
+    private bool active;
+    private Rigidbody2D rgb;
 
+    void Start()
+    {
+        rgb = transform.GetComponent<Rigidbody2D>();
+        rgb.isKinematic = true;
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!NextFire)
+        if (active)
         {
-            transform.GetChild(transform.childCount - 1).position = transform.position;
-        }
-        if ((transform.rotation.eulerAngles.y >= 170 && transform.rotation.eulerAngles.z == 0)||
-            (transform.rotation.eulerAngles.z >= 170 && transform.rotation.eulerAngles.y == 0))
-        {
-             transform.position = transform.position + new Vector3(0.005f * Speed, 0, 0);
-        }
-        else
-        {
-            transform.position = transform.position - new Vector3(0.005f * Speed, 0, 0);
-        }
-        GameObject ultraplex = GameObject.Find("ultraplex");
-        if (ultraplex != null)
-        {
-            if (NextFire)
+            if (!NextFire)
             {
-                FireLaser();
-                NextFire = false;
+                transform.GetChild(transform.childCount - 1).position = transform.position;
+            }
+            if ((transform.rotation.eulerAngles.y >= 170 && transform.rotation.eulerAngles.z == 0) ||
+                (transform.rotation.eulerAngles.z >= 170 && transform.rotation.eulerAngles.y == 0))
+            {
+                transform.position = transform.position + new Vector3(0.005f * Speed, 0, 0);
+            }
+            else
+            {
+                transform.position = transform.position - new Vector3(0.005f * Speed, 0, 0);
+            }
+            GameObject ultraplex = GameObject.Find("ultraplex");
+            if (ultraplex != null)
+            {
+                if (NextFire)
+                {
+                    FireLaser();
+                    NextFire = false;
+                }
             }
         }
+    }
+
+    public void Activate()
+    {
+        active = true;
+        rgb.isKinematic = false;
     }
 
     private void FireLaser()
