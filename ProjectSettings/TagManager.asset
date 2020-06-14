@@ -16,8 +16,8 @@ TagManager:
   - borders
   - player
   - guns
-  - 
-  - 
+  - enemies
+  - camera
   - 
   - 
   - 

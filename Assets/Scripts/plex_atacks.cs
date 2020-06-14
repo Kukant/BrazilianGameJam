@@ -37,7 +37,6 @@ public class plex_atacks : MonoBehaviour {
         MEELE,
         GUN,
         LASER,
-        SHITBOMB
     }
 
     // Start is called before the first frame update
@@ -77,7 +76,6 @@ public class plex_atacks : MonoBehaviour {
     }
 
     private void attack(float dx, float dy, float angleZ) {
-        //transform.position = positionAttacking();
         switch (ActiveAttack) {
             case ATTACK.MEELE:
                 laserBeamAnimator.enabled = false;
@@ -87,7 +85,12 @@ public class plex_atacks : MonoBehaviour {
                     meeleCollider.enabled = true;
                 }
                 break;
-            case ATTACK.GUN: break;
+            case ATTACK.GUN:
+                laserBeamAnimator.enabled = false;
+                GetComponentInChildren<RocketLauncher>().Launch();
+                
+                angleZ = 0;
+                break;
             case ATTACK.LASER:
                 if (LaserCooling == 0) {
                     LaserCooling = LaserCooldown;
@@ -98,12 +101,6 @@ public class plex_atacks : MonoBehaviour {
                         laserBeamAnimator.enabled = true;
                     }
                 }
-                break;
-            case ATTACK.SHITBOMB:
-                laserBeamAnimator.enabled = false;
-                GetComponentInChildren<RocketLauncher>().Launch();
-                
-                angleZ = 0;
                 break;
         }
         
@@ -144,24 +141,13 @@ public class plex_atacks : MonoBehaviour {
             GetComponentInChildren<RocketLauncher>().Activate(false);
         } else if (Input.GetKey(KeyCode.Alpha2)) {
             ActiveAttack = ATTACK.GUN;
-            GetComponentInChildren<RocketLauncher>().Activate(false);
         } else if (Input.GetKey(KeyCode.Alpha3)) {
             ActiveAttack = ATTACK.LASER;
             GetComponentInChildren<RocketLauncher>().Activate(false);
-        } else if (Input.GetKey(KeyCode.Alpha4)) {
-            ActiveAttack = ATTACK.SHITBOMB;
-            GetComponentInChildren<RocketLauncher>().Activate(true);
         } else if (Input.GetKey(KeyCode.LeftControl) && keyShifted == 0) {
             ActiveAttack = (ATTACK)(((int)ActiveAttack + 1) % 3);
             GetComponentInChildren<RocketLauncher>().Activate(false);
             keyShifted = 10;
         }
-    }
-
-    private Vector3 positionAttacking() {
-        float plexRotation = plexTransform.rotation.z;
-        float dx = plexRotation / 1.2f;
-        float dy = (Math.Abs(plexRotation - 0.22f) / 1.5f) - .14f;
-        return new Vector3(transform.position.x + dx, transform.position.y + dy, transform.position.z);
     }
 }
