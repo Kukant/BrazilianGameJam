@@ -1,13 +1,7 @@
 fileFormatVersion: 2
-guid: b4507c2b2ecc644749b31332439071af
+guid: de33183f658e56844a0eb65ade2c8de8
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 6155760262988319565
-    second: 69D545DC-DC85-4B4F-9AB5-4C88F45736BA_0
-  - first:
-      213: -3814507873541192631
-    second: 69D545DC-DC85-4B4F-9AB5-4C88F45736BA_1
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -46,11 +40,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.30649805, y: 0.7624026}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -77,63 +71,9 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: 69D545DC-DC85-4B4F-9AB5-4C88F45736BA_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 576.5
-        height: 658
-      alignment: 9
-      pivot: {x: 0.37969753, y: 0.6654223}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d4b42e53857ad6550800000000000000
-      internalID: 6155760262988319565
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 69D545DC-DC85-4B4F-9AB5-4C88F45736BA_1
-      rect:
-        serializedVersion: 2
-        x: 576
-        y: 0
-        width: 576.5
-        height: 658
-      alignment: 9
-      pivot: {x: 0.14200546, y: 0.65170145}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 94485a49c45201bc0800000000000000
-      internalID: -3814507873541192631
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []

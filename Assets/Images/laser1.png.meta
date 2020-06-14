@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-guid: b4507c2b2ecc644749b31332439071af
+guid: f5d2e91fe979d7c4a8c65172ecd0a8bb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6155760262988319565
-    second: 69D545DC-DC85-4B4F-9AB5-4C88F45736BA_0
+      213: -624346224196815526
+    second: laser1_0
   - first:
-      213: -3814507873541192631
-    second: 69D545DC-DC85-4B4F-9AB5-4C88F45736BA_1
+      213: -1633989253501228981
+    second: laser1_1
+  - first:
+      213: 7060120618449891155
+    second: laser1_2
+  - first:
+      213: 95120230918688434
+    second: laser1_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -93,43 +99,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 69D545DC-DC85-4B4F-9AB5-4C88F45736BA_0
+      name: laser1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 576.5
-        height: 658
+        width: 117.5
+        height: 254
       alignment: 9
-      pivot: {x: 0.37969753, y: 0.6654223}
+      pivot: {x: 0.5626606, y: 0.50143176}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4b42e53857ad6550800000000000000
-      internalID: 6155760262988319565
+      spriteID: a5574e1ca60e557f0800000000000000
+      internalID: -624346224196815526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 69D545DC-DC85-4B4F-9AB5-4C88F45736BA_1
+      name: laser1_1
       rect:
         serializedVersion: 2
-        x: 576
+        x: 117
         y: 0
-        width: 576.5
-        height: 658
-      alignment: 9
-      pivot: {x: 0.14200546, y: 0.65170145}
+        width: 117.5
+        height: 254
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94485a49c45201bc0800000000000000
-      internalID: -3814507873541192631
+      spriteID: b48e0426e67e259e0800000000000000
+      internalID: -1633989253501228981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser1_2
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 0
+        width: 117.5
+        height: 254
+      alignment: 9
+      pivot: {x: 0.42081663, y: 0.50406986}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35fed1edb469af160800000000000000
+      internalID: 7060120618449891155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser1_3
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 0
+        width: 118
+        height: 254
+      alignment: 9
+      pivot: {x: 0.39048922, y: 0.50203496}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2be8cd6985fe15100800000000000000
+      internalID: 95120230918688434
       vertices: []
       indices: 
       edges: []

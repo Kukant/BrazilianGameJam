@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MeeleSlash
+  m_Name: snake2
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,14 +20,15 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 8901917539136426530, guid: 6de3cc59d690c8045809e6329f4adce4,
+      value: {fileID: 6155760262988319565, guid: b4507c2b2ecc644749b31332439071af,
         type: 3}
     - time: 0.083333336
-      value: {fileID: -8795633708163252549, guid: 6de3cc59d690c8045809e6329f4adce4,
+      value: {fileID: -3814507873541192631, guid: b4507c2b2ecc644749b31332439071af,
         type: 3}
-    - time: 0.16666667
-      value: {fileID: -5412437631481006346, guid: 6de3cc59d690c8045809e6329f4adce4,
-        type: 3}
+    - time: 0.25
+      value: {fileID: 21300000, guid: de33183f658e56844a0eb65ade2c8de8, type: 3}
+    - time: 0.41666666
+      value: {fileID: 21300000, guid: de33183f658e56844a0eb65ade2c8de8, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -47,20 +48,21 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 8901917539136426530, guid: 6de3cc59d690c8045809e6329f4adce4, type: 3}
-    - {fileID: -8795633708163252549, guid: 6de3cc59d690c8045809e6329f4adce4, type: 3}
-    - {fileID: -5412437631481006346, guid: 6de3cc59d690c8045809e6329f4adce4, type: 3}
+    - {fileID: 6155760262988319565, guid: b4507c2b2ecc644749b31332439071af, type: 3}
+    - {fileID: -3814507873541192631, guid: b4507c2b2ecc644749b31332439071af, type: 3}
+    - {fileID: 21300000, guid: de33183f658e56844a0eb65ade2c8de8, type: 3}
+    - {fileID: 21300000, guid: de33183f658e56844a0eb65ade2c8de8, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.25
+    m_StopTime: 0.5
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 0
+    m_LoopTime: 1
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0

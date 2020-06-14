@@ -56,27 +56,24 @@ public class Enemy1 : MonoBehaviour
             }
             else
             {
-                if (delay == Delay || inside)
+                inside = true;
+                foreach (Transform child in transform)
                 {
-                    inside = true;
-                    foreach (Transform child in transform)
+                    child.position = Vector2.MoveTowards(child.position, transform.position, -1 * 15 * Time.deltaTime);
+                    if (transform.childCount > iter)
                     {
-                        child.position = Vector2.MoveTowards(child.position, transform.position, -1 * 15 * Time.deltaTime);
-                        if (transform.childCount > iter)
+                        float angle = Vector3.Angle(Vector3.right, child.position - transform.position);
+                        if (transform.position.y - child.position.y > 0)
                         {
-                            float angle = Vector3.Angle(Vector3.right, child.position - transform.position);
-                            if (transform.position.y - child.position.y > 0)
-                            {
-                                child.rotation = Quaternion.Euler(0, 0, 360 - angle);
-                            }
-                            else
-                            {
-                                child.rotation = Quaternion.Euler(0, 0, angle);
-                            }
-                            iter++;
+                            child.rotation = Quaternion.Euler(0, 0, 360 - angle);
                         }
-                        child.GetComponent<Animator>().enabled = true;
+                        else
+                        {
+                            child.rotation = Quaternion.Euler(0, 0, angle);
+                        }
+                        iter++;
                     }
+                    child.GetComponent<Animator>().enabled = true;
                 }
                 if (transform.childCount == 0)
                 {
