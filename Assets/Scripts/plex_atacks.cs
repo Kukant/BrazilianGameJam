@@ -78,7 +78,7 @@ public class plex_atacks : MonoBehaviour {
 
     private void attack(float dx, float dy, float angleZ) {
         transform.rotation = Quaternion.Euler(0, 0, angleZ);
-        transform.position = positionAttacking();
+        //transform.position = positionAttacking();
         switch (ActiveAttack) {
             case ATTACK.MEELE:
                 laserBeamAnimator.enabled = false;
@@ -102,7 +102,7 @@ public class plex_atacks : MonoBehaviour {
                 break;
             case ATTACK.SHITBOMB:
                 laserBeamAnimator.enabled = false;
-                GetComponent<RocketLauncher>().Launch();
+                GetComponentInChildren<RocketLauncher>().Launch();
                 break;
         }
 
@@ -154,6 +154,6 @@ public class plex_atacks : MonoBehaviour {
         float plexRotation = plexTransform.rotation.z;
         float dx = plexRotation / 1.2f;
         float dy = (Math.Abs(plexRotation - 0.22f) / 1.5f) - .14f;
-        return new Vector3(baseTransform.x + dx, baseTransform.y + dy, baseTransform.z);
+        return new Vector3(transform.position.x + dx, transform.position.y + dy, transform.position.z);
     }
 }

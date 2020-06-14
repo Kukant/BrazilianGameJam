@@ -8,18 +8,20 @@ public class RocketLauncher : MonoBehaviour {
     private DateTime lastLaunch;
     public GameObject rocketPrefab;
     public int cooldownMills = 1000;
-
+    private Rigidbody2D playerRB;
     public void Start() {
         lastLaunch = DateTime.Now;
+        playerRB = GameObject.Find("Player").GetComponent<Rigidbody2D>();
     }
 
     public void Launch() {
         TimeSpan fromLastLaunch = DateTime.Now - lastLaunch;
-        if (fromLastLaunch.Milliseconds < cooldownMills) {
+        print(fromLastLaunch.Milliseconds);
+        if (fromLastLaunch.TotalMilliseconds < cooldownMills) {
             return;
         }
         lastLaunch = DateTime.Now;
-        
+
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Keypad8)) {
             _launch(0);
         } else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.Keypad5)) {
@@ -32,6 +34,7 @@ public class RocketLauncher : MonoBehaviour {
     }
 
     private void _launch(int angle) {
-        Instantiate(rocketPrefab, transform.position, Quaternion.Euler(0, 0, angle));
+        var r = Instantiate(rocketPrefab, transform.position, Quaternion.Euler(0, 0, angle));
+        r.GetComponent<Rigidbody2D>().velocity = playerRB.velocity;
     }
 }
