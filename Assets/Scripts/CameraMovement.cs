@@ -13,31 +13,33 @@ public class CameraMovement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        playerTransform = GameObject.Find("Player(Clone)").transform;
         thisCamera = GetComponent<Camera>();
         cameraWidth = thisCamera.aspect * thisCamera.orthographicSize * 2;
     }
 
     public void Run() {
+        playerTransform = GameObject.Find("Player(Clone)").transform;
         goldSpeed = 0.1f;
     }
 
     // LateUpdate is called after Update each frame
     void FixedUpdate () {
-        // right quarter
-        if (playerTransform.position.x > transform.position.x + cameraWidth/3
-            && speed < 20f * goldSpeed) {
-            speed += 0.01f; 
-        // left quarter
-        } else if (playerTransform.position.x < transform.position.x - cameraWidth/4 &&
-            speed > 0.5 * goldSpeed) {
-            speed -= 0.01f;
-        }
-        else if (Math.Abs(speed - goldSpeed) > 0.01f) {
-            speed += 0.005f * (speed < goldSpeed ? 1 : -1);
-        }
+        if (goldSpeed > 0 && playerTransform != null) {
+            // right quarter
+            if (playerTransform.position.x > transform.position.x + cameraWidth/3
+                && speed < 5 * goldSpeed) {
+                speed += 0.01f; 
+                // left quarter
+            } else if (playerTransform.position.x < transform.position.x - cameraWidth/4 &&
+                       speed > 0.5 * goldSpeed) {
+                speed -= 0.01f;
+            }
+            else if (Math.Abs(speed - goldSpeed) > 0.01f) {
+                speed += 0.005f * (speed < goldSpeed ? 1 : -1);
+            }
 
-        transform.position = transform.position + new Vector3(speed, 0, 0);
+            transform.position = transform.position + new Vector3(speed, 0, 0);
+        }
     }
 
     public void Stop() {

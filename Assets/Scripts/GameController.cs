@@ -18,12 +18,14 @@ public class GameController : MonoBehaviour {
     void Start() {
         level1 = Instantiate(Level1Prefab, Vector3.zero, Quaternion.identity).GetComponent<LevelScript>();
         level1.Load();
+        level1.enabled = false;
         scoreText = Score.GetComponentInChildren<Text>();
         MusicController.SoundController(MusicController.SOUNDS.MENU, true);
     }
 
     public void RunLevel1() {
         level1.Run();
+        level1.enabled = true;
         MainMenu.SetActive(false);
         Score.SetActive(true);
         MusicController.SoundController(MusicController.SOUNDS.MENU, false);
@@ -31,6 +33,14 @@ public class GameController : MonoBehaviour {
     }
 
     public void RestartLevel1() {
+        level1.mcMovement.Stop();
+        StartCoroutine(DelayRestart());
+        
+    }
+    
+    IEnumerator DelayRestart()
+    {
+        yield return new WaitForSeconds(4f);
         resetScore();
         level1.Restart();
     }

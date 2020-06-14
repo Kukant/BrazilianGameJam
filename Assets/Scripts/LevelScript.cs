@@ -12,7 +12,7 @@ public class LevelScript : MonoBehaviour {
 
 
     private GameObject mainCamera;
-    private CameraMovement mcMovement;
+    public CameraMovement mcMovement;
     private GameObject movingBackground, player;
     private Vector3 initialPos;
 
@@ -22,6 +22,7 @@ public class LevelScript : MonoBehaviour {
     private float lastCameraPos;
     private int generations = 0;
     private float generationRangeY = 4;
+    private Vector3 cameraInitPos;
     
     public void Start() {
         initialPos = transform.position;
@@ -33,6 +34,7 @@ public class LevelScript : MonoBehaviour {
         generateEnemies(generationOffest, enemiesGenerationLength + generationOffest);
         
         mainCamera = GameObject.Find("Main Camera");
+        cameraInitPos = mainCamera.transform.position;
         mcMovement = mainCamera.GetComponent<CameraMovement>();
         mcMovement.Stop();
         lastCameraPos = 0f;
@@ -47,7 +49,7 @@ public class LevelScript : MonoBehaviour {
         Destroy(player);
         
         transform.position = initialPos;
-        mainCamera.transform.position = initialPos;
+        mainCamera.transform.position = cameraInitPos;
         
         Load();
         Run();

@@ -8,12 +8,24 @@ public class PlayerHealth : MonoBehaviour {
     
     public float health = 100;
     public float initialHealth = 100;
-
+    public GameObject explosion;
     private void OnCollisionEnter2D(Collision2D other) {
         var damage = other.transform.gameObject.GetComponent<Damage>();
         isHurt = damage != null;
         if (damage != null) {
             health -= damage.damage;
+
+            if (health < 0) {
+                Die();
+            }
         }
+    }
+
+    void Die() {
+        var gc = GameObject.Find("GameController").GetComponent<GameController>();
+        gc.RestartLevel1();
+
+        Instantiate(explosion, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 }
