@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using UnityEditor.UI;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
 
 public class MovingBackground : MonoBehaviour {
