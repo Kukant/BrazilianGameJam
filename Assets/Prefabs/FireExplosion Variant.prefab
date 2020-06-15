@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 903992235062996568, guid: b15451c001a1e4ebdad0d8f551a7d01e,
+        type: 3}
+      propertyPath: damage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3162129364708828748, guid: b15451c001a1e4ebdad0d8f551a7d01e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -90,7 +95,7 @@ PrefabInstance:
     - target: {fileID: 3162129364708828750, guid: b15451c001a1e4ebdad0d8f551a7d01e,
         type: 3}
       propertyPath: m_Name
-      value: FireExplosion
+      value: FireExplosion Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b15451c001a1e4ebdad0d8f551a7d01e, type: 3}

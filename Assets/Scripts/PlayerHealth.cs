@@ -10,7 +10,7 @@ public class PlayerHealth : MonoBehaviour {
     public float initialHealth = 100;
     public GameObject explosion;
     private void OnCollisionEnter2D(Collision2D other) {
-        var damage = other.transform.gameObject.GetComponent<Damage>();
+        var damage = other.gameObject.GetComponent<Damage>();
         isHurt = damage != null;
         if (damage != null) {
             health -= damage.damage;
@@ -24,8 +24,8 @@ public class PlayerHealth : MonoBehaviour {
     void Die() {
         var gc = GameObject.Find("GameController").GetComponent<GameController>();
         gc.RestartLevel1();
-
-        Instantiate(explosion, transform.position, transform.rotation);
+        if (explosion)
+            Instantiate(explosion, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 }

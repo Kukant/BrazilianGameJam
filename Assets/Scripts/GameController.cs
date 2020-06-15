@@ -35,11 +35,9 @@ public class GameController : MonoBehaviour {
     public void RestartLevel1() {
         level1.mcMovement.Stop();
         StartCoroutine(DelayRestart());
-        
     }
     
-    IEnumerator DelayRestart()
-    {
+    IEnumerator DelayRestart() {
         yield return new WaitForSeconds(4f);
         resetScore();
         level1.Restart();
@@ -48,6 +46,12 @@ public class GameController : MonoBehaviour {
     private void resetScore() {
         score = -1;
         AddScore(1);
+    }
+
+    public void BackToMenu() {
+        level1.enabled = false;
+        MainMenu.SetActive(true);
+        Score.SetActive(false);
     }
 
     public void AddScore(int add) {
