@@ -15,6 +15,7 @@ public class plex_atacks : MonoBehaviour {
     public int MeeleCooling = 0;
     private CircleCollider2D meeleCollider;
     private Animator[] meeleSlashAnimators;
+    private SpriteRenderer[] meeleSlashSprites;
     
     public float GunRadius = 10f;
     public float GunPower = 10f;
@@ -39,10 +40,9 @@ public class plex_atacks : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         meeleSlashAnimators = transform.GetChild(1).GetComponentsInChildren<Animator>();
+        meeleSlashSprites = transform.GetChild(1).GetComponentsInChildren<SpriteRenderer>();
         meeleCollider = transform.GetChild(1).GetComponents<CircleCollider2D>()[0];
-        foreach (Animator animator in meeleSlashAnimators) {
-            animator.enabled = false;
-        }
+        toggleMeele(false);
         meeleCollider.radius = MeeleRadius;
         meeleCollider.enabled = false;
 
@@ -52,6 +52,18 @@ public class plex_atacks : MonoBehaviour {
         laserBeamSprite.enabled = false;
         laserBeamAnimator.enabled = false;
         laserCollider.enabled = false;
+    }
+
+    private void toggleMeele(bool on) {
+        foreach (Animator animator in meeleSlashAnimators) {
+            if (on) {
+                animator.Rebind();
+            }
+            animator.enabled = on;
+        }
+        foreach (SpriteRenderer sprite in meeleSlashSprites) {
+            sprite.enabled = on;
+        }
     }
 
     // Update is called once per frame
@@ -81,12 +93,8 @@ public class plex_atacks : MonoBehaviour {
                 if (MeeleCooling == 0) {
                     MeeleCooling = MeeleCooldown;
                     meeleCollider.enabled = true;
-                    foreach (Animator animator in meeleSlashAnimators) {
-                        animator.Rebind();
-                        if (!animator.enabled) {
-                            animator.enabled = true;
-                        }
-                    }
+                    toggleMeele(true);
+                    StartCoroutine(disableMeele());
                 }
                 angleZ = 0;
                 break;
@@ -114,6 +122,11 @@ public class plex_atacks : MonoBehaviour {
         transform.rotation = Quaternion.Euler(0, 0, angleZ);
         
         attacking = meeleCollider.enabled || laserBeamAnimator.enabled;
+    }
+
+    private IEnumerator disableMeele() {
+        yield return new WaitForSeconds(0.5f);
+        toggleMeele(false);
     }
     
     private IEnumerator enableLaserCollider() {

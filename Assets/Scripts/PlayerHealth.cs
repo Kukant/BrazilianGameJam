@@ -22,6 +22,7 @@ public class PlayerHealth : MonoBehaviour {
     }
 
     void Die() {
+        MusicController.SoundController(MusicController.SOUNDS.ULTRAPLEX_DEATH, true);
         var gc = GameObject.Find("GameController").GetComponent<GameController>();
         gc.RestartLevel1();
         if (explosion)
