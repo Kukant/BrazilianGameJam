@@ -53,7 +53,7 @@ public class Enemy2 : MonoBehaviour
             laser = Instantiate(Spawnee, transform.position, new Quaternion(0, 0, 0, 0));
         }
         laser.name = "laser";
-        laser.transform.SetParent(transform);
+        //laser.transform.SetParent(transform);
     }
     
     IEnumerator Shooting()
