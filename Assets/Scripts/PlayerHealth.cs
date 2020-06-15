@@ -20,6 +20,18 @@ public class PlayerHealth : MonoBehaviour {
             }
         }
     }
+    
+    private void OnTriggerEnter2D(Collider2D other) {
+        var damage = other.gameObject.GetComponent<Damage>();
+        isHurt = damage != null;
+        if (damage != null) {
+            health -= damage.damage;
+
+            if (health < 0) {
+                Die();
+            }
+        }
+    }
 
     void Die() {
         MusicController.SoundController(MusicController.SOUNDS.ULTRAPLEX_DEATH, true);

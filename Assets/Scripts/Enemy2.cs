@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Enemy2 : MonoBehaviour
 {
@@ -12,16 +15,13 @@ public class Enemy2 : MonoBehaviour
     {
         rgb = transform.GetComponent<Rigidbody2D>();
         rgb.isKinematic = true;
+        StartCoroutine(Shooting());
     }
     // Update is called once per frame
     void FixedUpdate()
     {
         if (active)
         {
-            if (!NextFire)
-            {
-                transform.GetChild(transform.childCount - 1).position = transform.position;
-            }
             if ((transform.rotation.eulerAngles.y >= 170 && transform.rotation.eulerAngles.z == 0) ||
                 (transform.rotation.eulerAngles.z >= 170 && transform.rotation.eulerAngles.y == 0))
             {
@@ -30,15 +30,6 @@ public class Enemy2 : MonoBehaviour
             else
             {
                 transform.position = transform.position - new Vector3(0.005f * Speed, 0, 0);
-            }
-            GameObject ultraplex = GameObject.Find("ultraplex");
-            if (ultraplex != null)
-            {
-                if (NextFire)
-                {
-                    FireLaser();
-                    NextFire = false;
-                }
             }
         }
     }
@@ -61,7 +52,16 @@ public class Enemy2 : MonoBehaviour
         {
             laser = Instantiate(Spawnee, transform.position, new Quaternion(0, 0, 0, 0));
         }
-        laser.name = string.Format("laser");
+        laser.name = "laser";
         laser.transform.SetParent(transform);
+    }
+    
+    IEnumerator Shooting()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (active) {
+            FireLaser();
+        }
+        StartCoroutine(Shooting());
     }
 }

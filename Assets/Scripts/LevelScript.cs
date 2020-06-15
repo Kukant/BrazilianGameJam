@@ -38,6 +38,7 @@ public class LevelScript : MonoBehaviour {
         mcMovement = mainCamera.GetComponent<CameraMovement>();
         mcMovement.Stop();
         lastCameraPos = 0f;
+        generations = 0;
     }
 
     public void Run() {
@@ -47,7 +48,7 @@ public class LevelScript : MonoBehaviour {
     public void Restart() {
         Destroy(movingBackground);
         Destroy(player);
-        
+
         transform.position = initialPos;
         mainCamera.transform.position = cameraInitPos;
         
