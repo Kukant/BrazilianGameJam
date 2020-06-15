@@ -22,6 +22,7 @@ public class LaserEye : MonoBehaviour
         upTrans = GameObject.Find("ultraplex")?.transform;
         if (!upTrans) {
             Destroy(gameObject);
+            return;
         }
 
         movement = (upTrans.position - transform.position).normalized;

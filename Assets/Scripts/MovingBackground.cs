@@ -3,10 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using UnityEditor.UI;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Debug = UnityEngine.Debug;
+
 using Object = UnityEngine.Object;
 
 public class MovingBackground : MonoBehaviour {
@@ -46,6 +44,15 @@ public class MovingBackground : MonoBehaviour {
         physicalBackgroundInstance.update(cameraXMin);
     }
 
+    private void OnDestroy() {
+        if (physicalBackgroundInstance != null)
+            physicalBackgroundInstance.DestroyChildren();
+        
+        if (slowBackgrounds != null)
+            for (var i = 0; i < slowBackgrounds.Count; i++) {
+                slowBackgrounds[i].DestroyChildren();
+            }
+    }
 }
 
 class PhysicalBackground {
@@ -75,8 +82,15 @@ class PhysicalBackground {
             );
             Object.Destroy(instances.Dequeue());
         }
-
     }
+
+    public void DestroyChildren() {
+        while (instances.Count > 0) {
+            Object.Destroy(instances.Dequeue());
+        }
+    }
+
+
 }
 
 
@@ -122,6 +136,12 @@ class SlowBackground {
             
             var oldPos = go.transform.position;
             go.transform.position = new Vector3(oldPos.x + slowdownStep + jump, oldPos.y);
+        }
+    }
+
+    public void DestroyChildren() {
+        for (var i = 0; i < backgrounds.Count; i++) {
+            Object.Destroy(backgrounds[i]);
         }
     }
 }

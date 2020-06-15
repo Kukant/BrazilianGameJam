@@ -23,6 +23,7 @@ public class LevelScript : MonoBehaviour {
     private int generations = 0;
     private float generationRangeY = 4;
     private Vector3 cameraInitPos;
+    private List<GameObject> generatedEnemies;
     
     public void Start() {
         initialPos = transform.position;
@@ -40,6 +41,7 @@ public class LevelScript : MonoBehaviour {
         lastCameraPos = 0f;
         generations = 0;
     }
+    
 
     public void Run() {
         mcMovement.Run();
@@ -48,6 +50,15 @@ public class LevelScript : MonoBehaviour {
     public void Restart() {
         Destroy(movingBackground);
         Destroy(player);
+
+        for (var i = 0; i < generatedEnemies.Count; i++) {
+            var e = generatedEnemies[i];
+            if (e != null) {
+                Destroy(e);
+            }
+        }
+        
+        generatedEnemies.Clear();
 
         transform.position = initialPos;
         mainCamera.transform.position = cameraInitPos;
@@ -74,6 +85,10 @@ public class LevelScript : MonoBehaviour {
     }
 
     private void generateEnemies(float fromX, float toX) {
+        if (generatedEnemies == null) {
+            generatedEnemies = new List<GameObject>();
+        }
+
         float enemiesToGenerate = Convert.ToInt32(Random.value * enemiesPerIntervalBase) + generations;
         generations++;
 
@@ -85,7 +100,8 @@ public class LevelScript : MonoBehaviour {
                 y = 0;
             }
 
-            Instantiate(EnemiesPrefabs[enemIdx], new Vector2(x, y), EnemiesPrefabs[enemIdx].transform.rotation);
+            var e = Instantiate(EnemiesPrefabs[enemIdx], new Vector2(x, y), EnemiesPrefabs[enemIdx].transform.rotation);
+            generatedEnemies.Add(e);
         }
     }
 }
